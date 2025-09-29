@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gen
+  argocd.argoproj.io/sync-wave: "3"
+spec:
+  selector:
+    matchLabels:
+      app: gen
+  template:
+    metadata:
+      labels:
+        app: gen
+    spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: pvc-claimer-yaml
+      containers:
+      - name: gen
+        image: mado445555/pr3genjenkins:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - mountPath: "/data_A"
+          name: storage
+        envFrom:
+        - configMapRef:
+          name: gen-conf
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gen-conf
+  argocd.argoproj.io/sync-wave: "2"
+data:
+  echo_url: "http://echo-svc:20"
+  pvc_a: "/data_A/nums.txt"
+  pvc_b: "/data_A/nums.txt"

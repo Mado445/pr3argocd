@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-svc
+  argocd.argoproj.io/sync-wave: "3"
+spec:
+  selector:
+    app: echo
+  ports:
+  - protocol: TCP
+    port: 20
+    targetPort: 8080
