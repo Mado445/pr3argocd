@@ -26,8 +26,16 @@ spec:
         volumeMounts:
         - mountPath: "/data_A"
           name: storage
-        envFrom:
-        - configMapRef:
-          name: gen-conf
+        env:
+        - name: PVC_A_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: gen-conf
+              key: pvc_a
+        - name: PVC_B_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: gen-conf
+              key: pvc_b
         ports:
         - containerPort: 8080
